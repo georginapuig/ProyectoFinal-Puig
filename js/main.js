@@ -6,6 +6,7 @@ const elInputsContainer = document.getElementById('inputsContainer');
 const btn = document.getElementById('button');
 const elPago = document.getElementById('pago');
 const elError = document.getElementById('error');
+const tbody = document.getElementById('tbody');
 
 class CalculadoraCuotas {
   constructor() {
@@ -16,19 +17,39 @@ class CalculadoraCuotas {
   }
 
   calcularCuotas() {
-    this.pago = (parseFloat(this.monto) / parseInt(this.cuotas)).toFixed(2);
+    this.pago = parseFloat(this.monto) / parseInt(this.cuotas);
   }
 
   pagos() {
-    this.arrPagos.push(this.pago);
-    const totalPagos = this.arrPagos.reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    );
-    return totalPagos;
+    this.arrPagos.push({
+      pago: this.pago,
+      monto: this.monto,
+      cuota: this.cuotas,
+    });
+  }
+
+  guardarPagos() {
+    localStorage.setItem('pagos', JSON.stringify(this.arrPagos));
+  }
+
+  printPagos() {
+    const pagos = JSON.parse(localStorage.getItem('pagos'));
+
+    for (const pago of pagos) {
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td>${pago.pago.toFixed(2)}</td>
+        <td>${pago.monto}</td>
+        <td>${pago.cuota}</td>
+      `;
+
+      tbody.appendChild(tr);
+    }
   }
 
   init() {
+    this.printPagos();
     btn.addEventListener('click', (e) => {
       this.monto = elMonto.value;
       this.cuotas = elCuotas.value;
@@ -40,13 +61,25 @@ class CalculadoraCuotas {
       } else {
         this.calcularCuotas();
 
-        console.log(this.pago);
-        console.log(this.arrPagos);
-
         elError.innerHTML = '';
-        elPago.innerHTML = `<p>El monto de cada cuota es: ${this.pago}</p>`;
-        this.arrPagos = [];
+        elPago.innerHTML = `<p>El monto de cada cuota es: $${this.pago.toFixed(
+          2
+        )}</p>`;
+
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>${this.pago.toFixed(2)}</td>
+          <td>${this.monto}</td>
+          <td>${this.cuotas}</td>
+        `;
+
+        tbody.appendChild(tr);
+
+        this.pagos();
+        console.log(this.arrPagos);
       }
+      this.guardarPagos();
     });
   }
 }
