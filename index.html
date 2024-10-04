@@ -3,9 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pre entrega 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Pre entrega 3</title>
 </head>
 <body>
+  <h1 class="text-3xl font-bold text-center my-5">Calcular pagos</h1>
+
+  <div id="inputsContainer" class="flex justify-center">
+    <input id="monto" type="number" value="" placeholder="Ingrese el monto del producto.">
+    <input id="cuotas" type="number" value="" placeholder="Ingrese el numero de cuotas.">
+  </div>
+
+  <button id="button">Calcular</button>
+  <p id="pago"></p>
+  <p id="error"></p>
+
   <script src="js/main.js"></script>
 </body>
 </html>
