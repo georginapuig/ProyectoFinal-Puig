@@ -4,32 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./css/styles.css">
   <title>Pre entrega 3</title>
 </head>
-<body>
-  <h1 class="text-3xl font-bold text-center my-5">Calcular pagos</h1>
+<body class="bg-black">
+  <h1 class="text-3xl font-bold text-white text-center mt-5 mb-3">Calcular pagos</h1>
 
-  <div id="inputsContainer" class="flex justify-center">
-    <input id="monto" type="number" value="" placeholder="Ingrese el monto del producto.">
-    <input id="cuotas" type="number" value="" placeholder="Ingrese el numero de cuotas.">
-  </div>
+  <main>
+    <div id="inputsContainer" class="flex justify-center flex-col mb-5">
+      <div class="my-5 flex flex-col">
+        <label class="text-white" for="monto">Monto</label>
+        <input id="monto" class="bg-transparent text-white border border-slate-600 p-1" type="number" value="" placeholder="Ingrese el monto del producto.">
+      </div>
 
-  <button id="button">Calcular</button>
-  <p id="pago"></p>
-  <p id="error"></p>
+      <div class="flex flex-col">
+        <label class="text-white" for="cuotas">Cuotas</label>
+        <input id="cuotas" class="bg-transparent text-white border border-slate-600 p-1" type="number" value="" placeholder="Ingrese el numero de cuotas.">
+      </div>
+    </div>
 
-  <table class="table-auto">
-    <thead>
-      <tr>
-        <th>Pago</th>
-        <th>Monto</th>
-        <th>Cuota</th>
-      </tr>
-    </thead>
-    <tbody id="tbody">
+    <button id="button" class="text-white btn bg-blue-500 hover:bg-blue-700 py-2 px-10 rounded-full mb-10">Calcular</button>
+    <p id="pago" class="text-white mb-3 "></p>
+    <p id="error"></p>
 
-    </tbody>
-  </table>
+    <h3 class="text-white mb-3 font-bold">Histórico de pagos</h3>
+    <table class="table-auto table-auto">
+      <thead>
+        <tr>
+          <th class="text-white border border-slate-600 px-8 py-1">Pago</th>
+          <th class="text-white border border-slate-600 px-8 py-1">Monto</th>
+          <th class="text-white border border-slate-600 px-8 py-1">Cuota</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+
+      </tbody>
+    </table>
+  </main>
 
   <script src="js/main.js"></script>
 </body>

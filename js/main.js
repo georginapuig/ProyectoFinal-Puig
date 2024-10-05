@@ -39,9 +39,9 @@ class CalculadoraCuotas {
       const tr = document.createElement('tr');
 
       tr.innerHTML = `
-        <td>${pago.pago.toFixed(2)}</td>
-        <td>${pago.monto}</td>
-        <td>${pago.cuota}</td>
+        <td class="border border-slate-600">${pago.pago.toFixed(2)}</td>
+        <td class="border border-slate-600">${pago.monto}</td>
+        <td class="border border-slate-600">${pago.cuota}</td>
       `;
 
       tbody.appendChild(tr);
@@ -69,9 +69,9 @@ class CalculadoraCuotas {
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
-          <td>${this.pago.toFixed(2)}</td>
-          <td>${this.monto}</td>
-          <td>${this.cuotas}</td>
+          <td class="border border-slate-600">${this.pago.toFixed(2)}</td>
+          <td class="border border-slate-600">${this.monto}</td>
+          <td class="border border-slate-600">${this.cuotas}</td>
         `;
 
         tbody.appendChild(tr);
