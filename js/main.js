@@ -22,7 +22,38 @@ class CalculadoraCuotas {
     this.pago = parseFloat(this.monto) / parseInt(this.cuotas);
   }
 
-  calcularPagos() {}
+  generarPagos() {
+    this.monto = elMonto.value;
+    this.cuotas = elCuotas.value;
+
+    if (isNaN(this.monto) || this.monto <= 0) {
+      alertMontoValido();
+    } else if (isNaN(this.cuotas) || this.cuotas <= 0) {
+      alertCuotaValida();
+    } else {
+      this.calcularCuotas();
+
+      elErrorMonto.innerHTML = '';
+      elErrorCuotas.innerHTML = '';
+      elPago.innerHTML = `<p>El monto de cada cuota es: $${Math.round(
+        this.pago
+      )}</p>`;
+
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td class="border border-slate-600">${Math.round(this.pago)}</td>
+        <td class="border border-slate-600">${this.monto}</td>
+        <td class="border border-slate-600">${this.cuotas}</td>
+      `;
+
+      tbody.appendChild(tr);
+
+      this.dataPagos();
+      console.log(this.arrPagos);
+    }
+    this.guardarPagos();
+  }
 
   dataPagos() {
     this.arrPagos.push({
@@ -63,37 +94,8 @@ class CalculadoraCuotas {
   init() {
     this.borrarTabla();
 
-    btnCalcular.addEventListener('click', (e) => {
-      this.monto = elMonto.value;
-      this.cuotas = elCuotas.value;
-
-      if (isNaN(this.monto) || this.monto <= 0) {
-        alertMontoValido();
-      } else if (isNaN(this.cuotas) || this.cuotas <= 0) {
-        alertCuotaValida();
-      } else {
-        this.calcularCuotas();
-
-        elErrorMonto.innerHTML = '';
-        elErrorCuotas.innerHTML = '';
-        elPago.innerHTML = `<p>El monto de cada cuota es: $${Math.round(
-          this.pago
-        )}</p>`;
-
-        const tr = document.createElement('tr');
-
-        tr.innerHTML = `
-          <td class="border border-slate-600">${Math.round(this.pago)}</td>
-          <td class="border border-slate-600">${this.monto}</td>
-          <td class="border border-slate-600">${this.cuotas}</td>
-        `;
-
-        tbody.appendChild(tr);
-
-        this.dataPagos();
-        console.log(this.arrPagos);
-      }
-      this.guardarPagos();
+    btnCalcular.addEventListener('click', () => {
+      this.generarPagos();
     });
   }
 }
