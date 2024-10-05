@@ -11,24 +11,28 @@
   <h1 class="text-3xl font-bold text-white text-center mt-5 mb-3">Calcular pagos</h1>
 
   <main>
-    <div id="inputsContainer" class="flex justify-center flex-col mb-5">
+    <div id="inputsContainer" class="flex justify-center flex-col mb-5 w-80">
       <div class="my-5 flex flex-col">
         <label class="text-white" for="monto">Monto</label>
         <input id="monto" class="bg-transparent text-white border border-slate-600 p-1" type="number" value="" placeholder="Ingrese el monto del producto.">
+        <p id="error-monto" class="text-rose-500 pt-1"></p>
       </div>
 
       <div class="flex flex-col">
         <label class="text-white" for="cuotas">Cuotas</label>
         <input id="cuotas" class="bg-transparent text-white border border-slate-600 p-1" type="number" value="" placeholder="Ingrese el numero de cuotas.">
+        <p id="error-cuotas" class="text-rose-500 pt-1"></p>
       </div>
     </div>
 
-    <button id="button" class="text-white btn bg-blue-500 hover:bg-blue-700 py-2 px-10 rounded-full mb-10">Calcular</button>
-    <p id="pago" class="text-white mb-3 "></p>
-    <p id="error"></p>
+    <button id="calcular" class="text-white btn bg-blue-500 hover:bg-blue-700 py-2 px-10 rounded-full mb-10">Calcular</button>
+    <p id="pago" class="text-white mb-5"></p>
 
-    <h3 class="text-white mb-3 font-bold">Histórico de pagos</h3>
-    <table class="table-auto table-auto">
+    <div class="flex justify-between w-full">
+      <h3 class="text-white mb-3 font-bold">Histórico de pagos</h3>
+      <button id="borrar" class="btn text-rose-500">Borrar</button>
+    </div>
+    <table class="table-auto table-auto mb-5">
       <thead>
         <tr>
           <th class="text-white border border-slate-600 px-8 py-1">Pago</th>

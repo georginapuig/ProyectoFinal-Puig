@@ -3,9 +3,11 @@
 const elMonto = document.getElementById('monto');
 const elCuotas = document.getElementById('cuotas');
 const elInputsContainer = document.getElementById('inputsContainer');
-const btn = document.getElementById('button');
+const btnCalcular = document.getElementById('calcular');
+const btnBorrar = document.getElementById('borrar');
 const elPago = document.getElementById('pago');
-const elError = document.getElementById('error');
+const elErrorMonto = document.getElementById('error-monto');
+const elErrorCuotas = document.getElementById('error-cuotas');
 const tbody = document.getElementById('tbody');
 
 class CalculadoraCuotas {
@@ -20,7 +22,9 @@ class CalculadoraCuotas {
     this.pago = parseFloat(this.monto) / parseInt(this.cuotas);
   }
 
-  pagos() {
+  calcularPagos() {}
+
+  dataPagos() {
     this.arrPagos.push({
       pago: this.pago,
       monto: this.monto,
@@ -39,7 +43,7 @@ class CalculadoraCuotas {
       const tr = document.createElement('tr');
 
       tr.innerHTML = `
-        <td class="border border-slate-600">${pago.pago.toFixed(2)}</td>
+        <td class="border border-slate-600">${Math.round(pago.pago)}</td>
         <td class="border border-slate-600">${pago.monto}</td>
         <td class="border border-slate-600">${pago.cuota}</td>
       `;
@@ -49,8 +53,17 @@ class CalculadoraCuotas {
     return pagos;
   }
 
+  borrarTabla() {
+    btnBorrar.addEventListener('click', () => {
+      localStorage.clear();
+      tbody.innerHTML = '';
+    });
+  }
+
   init() {
-    btn.addEventListener('click', (e) => {
+    this.borrarTabla();
+
+    btnCalcular.addEventListener('click', (e) => {
       this.monto = elMonto.value;
       this.cuotas = elCuotas.value;
 
@@ -61,22 +74,23 @@ class CalculadoraCuotas {
       } else {
         this.calcularCuotas();
 
-        elError.innerHTML = '';
-        elPago.innerHTML = `<p>El monto de cada cuota es: $${this.pago.toFixed(
-          2
+        elErrorMonto.innerHTML = '';
+        elErrorCuotas.innerHTML = '';
+        elPago.innerHTML = `<p>El monto de cada cuota es: $${Math.round(
+          this.pago
         )}</p>`;
 
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
-          <td class="border border-slate-600">${this.pago.toFixed(2)}</td>
+          <td class="border border-slate-600">${Math.round(this.pago)}</td>
           <td class="border border-slate-600">${this.monto}</td>
           <td class="border border-slate-600">${this.cuotas}</td>
         `;
 
         tbody.appendChild(tr);
 
-        this.pagos();
+        this.dataPagos();
         console.log(this.arrPagos);
       }
       this.guardarPagos();
@@ -85,10 +99,10 @@ class CalculadoraCuotas {
 }
 
 const alertMontoValido = () => {
-  elError.innerHTML = `<p>Ingrese un monto valido del producto.</p>`;
+  elErrorMonto.innerHTML = `Ingrese un monto valido del producto.`;
 };
 const alertCuotaValida = () => {
-  elError.innerHTML = `<p>IIngrese el numero mayor a 0.`;
+  elErrorCuotas.innerHTML = `Ingrese el numero mayor a 0.`;
 };
 const calculadora = new CalculadoraCuotas();
 calculadora.init();
