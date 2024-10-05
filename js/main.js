@@ -13,7 +13,7 @@ class CalculadoraCuotas {
     this.monto = 0;
     this.cuotas = 0;
     this.pago = 0;
-    this.arrPagos = [];
+    this.arrPagos = this.printPagos();
   }
 
   calcularCuotas() {
@@ -33,7 +33,7 @@ class CalculadoraCuotas {
   }
 
   printPagos() {
-    const pagos = JSON.parse(localStorage.getItem('pagos'));
+    const pagos = JSON.parse(localStorage.getItem('pagos')) || [];
 
     for (const pago of pagos) {
       const tr = document.createElement('tr');
@@ -46,10 +46,10 @@ class CalculadoraCuotas {
 
       tbody.appendChild(tr);
     }
+    return pagos;
   }
 
   init() {
-    this.printPagos();
     btn.addEventListener('click', (e) => {
       this.monto = elMonto.value;
       this.cuotas = elCuotas.value;
