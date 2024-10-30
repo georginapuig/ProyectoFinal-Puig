@@ -1,12 +1,11 @@
 main {
-  width: 20rem;
+  width: fit-content;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
 td {
   color: white;
   text-align: center;

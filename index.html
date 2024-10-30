@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./css/styles.css">
-  <title>Pre entrega 3</title>
+  <title>Calcular pagos</title>
 </head>
 <body class="bg-black">
-  <h1 class="text-3xl font-bold text-white text-center mt-5 mb-3">Calcular pagos</h1>
-
   <main>
-    <div id="inputsContainer" class="flex justify-center flex-col mb-5 w-80">
-      <div class="my-5 flex flex-col">
+    <h1 class="text-3xl font-bold text-white text-center mt-5 mb-3">Calcular pagos</h1>
+
+    <div id="inputsContainer" class="flex justify-between w-100 my-5">
+      <div class="flex flex-col mr-5">
         <label class="text-white" for="monto">Monto</label>
         <input id="monto" class="bg-transparent text-white border border-slate-600 p-1" type="number" value="" placeholder="Ingrese el monto del producto.">
         <p id="error-monto" class="text-rose-500 pt-1"></p>
@@ -25,27 +25,31 @@
       </div>
     </div>
 
-    <button id="calcular" class="text-white btn bg-blue-500 hover:bg-blue-700 py-2 px-10 rounded-full mb-10">Calcular</button>
-    <p id="pago" class="text-white mt-3 mb-10"></p>
+    <button id="calcular" class="text-white btn bg-blue-500 hover:bg-blue-700 py-2 px-10 rounded-full">Calcular</button>
+    <p id="pago" class="text-green-400 my-5"></p>
 
     <div class="flex justify-between w-full">
       <h3 class="text-white mb-3 font-bold">Histórico de pagos</h3>
-      <button id="borrar" class="btn text-rose-500 mb-3">Borrar</button>
+      <button id="borrar" class="btn text-rose-500 mb-3">Borrar todo</button>
     </div>
-    <table class="table-auto table-auto mb-5">
+    <table class="table-auto table-auto mb-10">
       <thead>
         <tr>
-          <th class="text-white border border-slate-600 px-8 py-1">Pago</th>
+          <th class="text-white border border-slate-600 px-8 py-1">Pago (UYU)</th>
+          <th class="text-white border border-slate-600 px-8 py-1">Pago (USD)</th>
           <th class="text-white border border-slate-600 px-8 py-1">Monto</th>
           <th class="text-white border border-slate-600 px-8 py-1">Cuota</th>
         </tr>
       </thead>
       <tbody id="tbody">
-
       </tbody>
     </table>
+
+    <canvas id="myChart" class="mb-10"></canvas>
   </main>
 
-  <script src="js/main.js"></script>
+  <script type="module" src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="js/chart.js"></script>
 </body>
 </html>
