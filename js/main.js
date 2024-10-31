@@ -9,12 +9,16 @@ const tbody = document.getElementById('tbody');
 const pagoText = document.getElementById('pago');
 
 const obtenerDivisas = async () => {
-  // api de conversor de moneda
-  const api =
-    'https://v6.exchangerate-api.com/v6/fcab5483d6088f9202163512/latest/USD';
-  const res = await fetch(api);
-  const data = await res.json();
-  return data.conversion_rates.UYU;
+  try {
+    // api de conversor de moneda
+    const api =
+      'https://v6.exchangerate-api.com/v6/fcab5483d6088f9202163512/latest/USD';
+    const res = await fetch(api);
+    const data = await res.json();
+    return data.conversion_rates.UYU;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export class CalculadoraCuotas {
